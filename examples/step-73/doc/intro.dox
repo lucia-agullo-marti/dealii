@@ -1,10 +1,50 @@
 <br>
 
-<i>This program was contributed by <COMPLETE ME>
+<i>This program was contributed by Jean-Paul Pelteret. 
+The introduction section was completed by Lucía Agulló Martí.
 </i>
 
 
 <h1>Introduction</h1>
 
-<h3>Finite strain elasticity using automatic differentiation</h3>
+In this tutorial we deal with finite strain elasticity using automatic 
+differentiation (AD).
 
+Finite strain elasticity is inherently nonlinear. This means that the 
+deformations are large, and therefore, small strain theory fails. The 
+governing equations must be formulated in terms of nonlinear kinematics 
+and nonlinear stress-strain relationships. This results in a problem 
+for which linear solvers are insufficient. We now require iterative 
+Netwon methods.
+
+This program deals with compressible neo-Hookean materials. Neo-Hookean 
+materials have already been discussed in step-44; they are a type of 
+hyperelastic materials. For hyperelastic materials we cannot longer 
+say that the stress is proportional to the strain. Instead, the 
+constitutive response can be derived from an elastic free energy 
+potential. These constitutive models are often used for materials which 
+experience large, i.e. nonlinear, elastic deformation.
+
+Compressible neo-Hookean solid materials have a strain-energy function 
+which is split into an isochoric and a volumetric part. This allows 
+the resistance of the material to shape changes and volume changes 
+to be controlled independently. Theoretically, this is a rather simple 
+nonlinear hyperelastic material model. Therefore, we can use this 
+material to focus on the numerical formulation of the tutorial 
+instead of primarily on the material complexity, while still capturing 
+the essential nonlinear behavior that is required to demonstrate 
+finite strain effects.
+
+The key challenge of this tutorial is how to correctly and efficiently 
+compute the linearization of the residual. Doing this by hand could 
+cause a lot of errors and would be very tedious. Hence, this program 
+uses automatic differentiation (AD). AD simplifies this process and 
+makes the implementation of nonlinear finite element methods (FEM) 
+robust. With the help of AD, derivatives are computed exactly up to 
+machine precision.
+
+To demonstrate the effect of AD, the program implements three different 
+assembly methods:
+1. A fully manual approach: Residual and linearization are computed manually.
+2. A hybrid approach: Residual is computed manually, while the linearization is performed using AD.
+3. A method using only AD for both the computation of the residual and the linearization.
